@@ -1,5 +1,16 @@
 from abc import ABCMeta, abstractmethod
+from enum import Enum
 from .LoadableObject import LoadableObjectBase, LoadableObjectContainer, LoadableTypeEnum
+
+class LogTypeEnum(Enum):
+    Joined = "joined"
+    Invited = "invited"
+    Kicked = "kicked"
+    RankChanged = "rank_change"
+    Treasury = "treasury"
+    Stash = "stash"
+    Motd = "motd"
+    Upgrade = "upgrade"
 
 class LogEntry(metaclass=ABCMeta):
     def __init__(self, id, json=None):
@@ -76,7 +87,7 @@ class LogEntryStash(LogEntry):
 
     def _populate_inner(self, json):
         self.operation = json.get("operation", None)
-        self.item = LoadableObjectContainer(json["item_id"], LoadableTypeEnum.Item)
+        self.item = LoadableObjectContainer(json["item_id"], LoadableTypeEnum.Item) if "item_id" in json else None
         self.count = json.get("count", None)
         self.coins = json.get("coins", None)
 

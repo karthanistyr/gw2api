@@ -143,7 +143,6 @@ class Gw2RestClient:
         guild_id = self.get_request(ep_guild_search, args)
         return guild_id
 
-
     def get_guild(self, id, api_key):
         ep_guild = "/v2/guild/{}"
 

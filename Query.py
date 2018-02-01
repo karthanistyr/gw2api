@@ -7,7 +7,7 @@ from .model.Skin import Skin
 from .model.Title import Title
 from .model.Character import Character
 from .model.Guild import Guild
-
+from .model.GuildLog import *
 from .model.LoadableObject import LoadableObjectContainer, LoadableObjectVisitorBase
 from .client.Gw2RestClient import Gw2RestClient
 
@@ -56,6 +56,34 @@ class Querier:
             guild.populate(guild_data)
 
         return [guild]
+
+    @privileged
+    def _get_guild_log(self, id, api_key, nb_lines=None):
+        guild_log_data = self.rest_client.get_guild_log(id, api_key, nb_lines)
+        returned_lines = []
+
+        if(guild_log_data is not None and len(guild_log_data) > 0):
+            for line in guild_log_data:
+                if(line["type"] == LogTypeEnum.Joined.value):
+                    returned_lines.append(LogEntryJoined(line["id"], line))
+                elif(line["type"] == LogTypeEnum.Invited.value):
+                    returned_lines.append(LogEntryInvited(line["id"], line))
+                elif(line["type"] == LogTypeEnum.Kicked.value):
+                    returned_lines.append(LogEntryKicked(line["id"], line))
+                elif(line["type"] == LogTypeEnum.RankChanged.value):
+                    returned_lines.append(LogEntryRankChanged(line["id"], line))
+                elif(line["type"] == LogTypeEnum.Treasury.value):
+                    returned_lines.append(LogEntryTreasury(line["id"], line))
+                elif(line["type"] == LogTypeEnum.Stash.value):
+                    returned_lines.append(LogEntryStash(line["id"], line))
+                elif(line["type"] == LogTypeEnum.Motd.value):
+                    returned_lines.append(LogEntryMotd(line["id"], line))
+                elif(line["type"] == LogTypeEnum.Upgrade.value):
+                    returned_lines.append(LogEntryUpgrade(line["id"], line))
+                else:
+                    raise ValueError("Unknown log entry type: {}".format(line["type"]))
+
+        return returned_lines
 
     def _get_guild_id(self, guild_full_name):
         guild_id_data = self.rest_client.get_guild_id(guild_full_name)
@@ -337,3 +365,6 @@ class Querier:
     @_depth_fetch
     def get_guild(self, id, lang=None, api_key=None):
         return LoadableObjectContainer(id, LoadableTypeEnum.Guild)
+
+    def get_guild_log(self, id, api_key, nb_lines=None):
+        return self._get_guild_log(id, api_key, nb_lines)
