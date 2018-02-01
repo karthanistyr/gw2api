@@ -51,9 +51,8 @@ class Querier:
     def _get_guild(self, id, api_key):
         guild_data = self.rest_client.get_guild(id, api_key)
 
-        guild = None
+        guild = Guild(id)
         if(guild_data is not None):
-            guild = Guild(id)
             guild.populate(guild_data)
 
         return guild
@@ -332,3 +331,6 @@ class Querier:
 
     def get_guild_id(self, guild_full_name):
         return self._get_guild_id(guild_full_name)
+
+    def get_guild(self, id, api_key):
+        return self._get_guild(id, api_key)
