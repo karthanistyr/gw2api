@@ -1,15 +1,15 @@
-from model.Achievement import Achievement
-from model.Item import *
-from model.Mastery import Mastery
-from model.MiniPet import MiniPet
-from model.Skill import Skill
-from model.Skin import Skin
-from model.Title import Title
-from model.Character import Character
-from model.Guild import Guild
+from .model.Achievement import Achievement
+from .model.Item import *
+from .model.Mastery import Mastery
+from .model.MiniPet import MiniPet
+from .model.Skill import Skill
+from .model.Skin import Skin
+from .model.Title import Title
+from .model.Character import Character
+from .model.Guild import Guild
 
-from model.LoadableObject import LoadableObjectContainer, LoadableObjectVisitorBase
-from client.Gw2RestClient import Gw2RestClient
+from .model.LoadableObject import LoadableObjectContainer, LoadableObjectVisitorBase
+from .client.Gw2RestClient import Gw2RestClient
 
 class StubObjectsTracker(LoadableObjectVisitorBase):
     """Tracks model objects that haven't been fully loaded yet"""
