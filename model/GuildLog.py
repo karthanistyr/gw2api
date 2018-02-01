@@ -32,6 +32,13 @@ class LogEntry(metaclass=ABCMeta):
     def _populate_inner(self, json):
         raise NotImplementedError()
 
+class LogUnknown(LogEntry):
+    def __init__(self, id, json=None):
+        super().__init__(id, json)
+
+    def _populate_inner(self, json):
+        pass
+
 class LogEntryJoined(LogEntry):
     def __init__(self, id, json=None):
         super().__init__(id, json)

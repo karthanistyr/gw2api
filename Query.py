@@ -81,7 +81,7 @@ class Querier:
                 elif(line["type"] == LogTypeEnum.Upgrade.value):
                     returned_lines.append(LogEntryUpgrade(line["id"], line))
                 else:
-                    raise ValueError("Unknown log entry type: {}".format(line["type"]))
+                    returned_lines.append(LogUnknown(line["id"], line))
 
         return returned_lines
 
