@@ -55,7 +55,7 @@ class Querier:
         if(guild_data is not None):
             guild.populate(guild_data)
 
-        return guild
+        return [guild]
 
     def _get_guild_id(self, guild_full_name):
         guild_id_data = self.rest_client.get_guild_id(guild_full_name)
