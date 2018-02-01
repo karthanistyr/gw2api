@@ -48,7 +48,7 @@ class Querier:
         return character_names
 
     @privileged
-    def _get_guild(self, id, api_key):
+    def _get_guild(self, id, lang, api_key):
         guild_data = self.rest_client.get_guild(id, api_key)
 
         guild = Guild(id)
@@ -270,6 +270,9 @@ class Querier:
                 if(len(loadable_characters) > 0):
                     fetch_and_correlate(loadable_characters, self._get_character)
 
+                if(len(loadable_guilds) > 0):
+                    fetch_and_correlate(loadable_guilds, self._get_guild)
+
             return to_return
         return wrapper
 
@@ -332,5 +335,6 @@ class Querier:
     def get_guild_id(self, guild_full_name):
         return self._get_guild_id(guild_full_name)
 
-    def get_guild(self, id, api_key):
-        return self._get_guild(id, api_key)
+    @_depth_fetch
+    def get_guild(self, ids, lang=None, api_key=None):
+        return LoadableObjectContainer(id, LoadableTypeEnum.Guild)
