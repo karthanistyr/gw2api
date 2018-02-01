@@ -237,7 +237,6 @@ class Querier:
                     if(items_to_load[index].loadable_type == LoadableTypeEnum.GuildUpgrade):
                         loadable_guildupgrades[items_to_load[index].id] = items_to_load[index]
 
-
                 #bulk fetch items
                 if(len(loadable_items) > 0):
                     fetch_and_correlate(loadable_items, self._get_items)
@@ -336,5 +335,5 @@ class Querier:
         return self._get_guild_id(guild_full_name)
 
     @_depth_fetch
-    def get_guild(self, ids, lang=None, api_key=None):
+    def get_guild(self, id, lang=None, api_key=None):
         return LoadableObjectContainer(id, LoadableTypeEnum.Guild)
