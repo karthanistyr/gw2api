@@ -1,4 +1,4 @@
-from gw2api.model.LoadableObject import LoadableObjectBase
+from .LoadableObject import LoadableObjectBase
 
 class MiniPet(LoadableObjectBase):
     def __init__(self, id):

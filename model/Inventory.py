@@ -1,4 +1,4 @@
-from gw2api.model.LoadableObject import LoadableObjectContainer, LoadableTypeEnum
+from .LoadableObject import LoadableObjectContainer, LoadableTypeEnum
 
 class InventoryBag:
     def __init__(self, json=None):

@@ -135,6 +135,15 @@ class Gw2RestClient:
         minis_data = self.get_request(ep_minis, args)
         return minis_data
 
+    def get_guild_id(self, name):
+        ep_guild_search = "/v2/guild/search"
+        # the argument "name" will be automatically url-encoded
+        args = {"name": name}
+
+        guild_id = self.get_request(ep_guild_search, args)
+        return guild_id
+
+
     def get_guild(self, id, api_key):
         ep_guild = "/v2/guild/{}"
 

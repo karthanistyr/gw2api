@@ -1,4 +1,4 @@
-from gw2api.model.LoadableObject import LoadableObjectBase, LoadableTypeEnum
+from .LoadableObject import LoadableObjectBase, LoadableTypeEnum
 
 class Skin(LoadableObjectBase):
     def __init__(self, id):

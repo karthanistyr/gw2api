@@ -1,6 +1,6 @@
 from enum import Enum
-from gw2api.model.LoadableObject import LoadableObjectBase, LoadableTypeEnum
-from gw2api.model.AchievementReward import *
+from .LoadableObject import LoadableObjectBase, LoadableTypeEnum
+from .AchievementReward import *
 
 class AchievementTypeEnum(Enum):
     Default = "Default"

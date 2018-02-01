@@ -1,6 +1,6 @@
 from enum import Enum
-from gw2api.model.LoadableObject import LoadableTypeEnum, LoadableObjectBase, LoadableObjectContainer
-from gw2api.model.Skill import Skill
+from .LoadableObject import LoadableTypeEnum, LoadableObjectBase, LoadableObjectContainer
+from .Skill import Skill
 
 class ItemType(Enum):
     Armor = "Armor"

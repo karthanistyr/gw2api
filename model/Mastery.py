@@ -1,4 +1,4 @@
-from gw2api.model.LoadableObject import LoadableObjectContainer, LoadableObjectBase
+from .LoadableObject import LoadableObjectContainer, LoadableObjectBase
 
 class MasteryLevel:
     def __init__(self, json=None):

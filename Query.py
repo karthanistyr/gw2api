@@ -1,15 +1,15 @@
-from gw2api.model.Achievement import Achievement
-from gw2api.model.Item import *
-from gw2api.model.Mastery import Mastery
-from gw2api.model.MiniPet import MiniPet
-from gw2api.model.Skill import Skill
-from gw2api.model.Skin import Skin
-from gw2api.model.Title import Title
-from gw2api.model.Character import Character
-from gw2api.model.Guild import Guild
+from model.Achievement import Achievement
+from model.Item import *
+from model.Mastery import Mastery
+from model.MiniPet import MiniPet
+from model.Skill import Skill
+from model.Skin import Skin
+from model.Title import Title
+from model.Character import Character
+from model.Guild import Guild
 
-from gw2api.model.LoadableObject import LoadableObjectContainer, LoadableObjectVisitorBase
-from gw2api.client.Gw2RestClient import Gw2RestClient
+from model.LoadableObject import LoadableObjectContainer, LoadableObjectVisitorBase
+from client.Gw2RestClient import Gw2RestClient
 
 class StubObjectsTracker(LoadableObjectVisitorBase):
     """Tracks model objects that haven't been fully loaded yet"""
@@ -57,6 +57,12 @@ class Querier:
             guild.populate(guild_data)
 
         return guild
+
+    def _get_guild_id(self, guild_full_name):
+        guild_id_data = self.rest_client.get_guild_id(guild_full_name)
+
+        if(guild_id_data is not None and len(guild_id_data) == 1):
+            return guild_id_data[0]
 
     def _get_itemstats(self, ids, lang=None):
         itemstats_data = self.rest_client.get_itemstats(ids, lang)
@@ -323,3 +329,6 @@ class Querier:
         for id in ids:
             returned_items.append(LoadableObjectContainer(id, LoadableTypeEnum.Item))
         return returned_items
+
+    def get_guild_id(self, guild_full_name):
+        return self._get_guild_id(guild_full_name)

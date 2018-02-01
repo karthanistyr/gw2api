@@ -1,6 +1,6 @@
-from gw2api.model.LoadableObject import LoadableObjectBase, LoadableTypeEnum
-from gw2api.model.Crafting import Crafting
-from gw2api.model.Inventory import *
+from .LoadableObject import LoadableObjectBase, LoadableTypeEnum
+from .Crafting import Crafting
+from .Inventory import *
 
 class Character(LoadableObjectBase):
     def __init__(self, name):

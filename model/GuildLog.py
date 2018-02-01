@@ -1,5 +1,5 @@
 from abc import ABCMeta, abstractmethod
-from gw2api.model.LoadableObject import LoadableObjectBase, LoadableObjectContainer, LoadableTypeEnum
+from .LoadableObject import LoadableObjectBase, LoadableObjectContainer, LoadableTypeEnum
 
 class LogEntry(metaclass=ABCMeta):
     def __init__(self, id, json=None):

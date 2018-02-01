@@ -1,4 +1,4 @@
-from gw2api.model.LoadableObject import LoadableObjectBase, LoadableObjectContainer, LoadableTypeEnum
+from .LoadableObject import LoadableObjectBase, LoadableObjectContainer, LoadableTypeEnum
 
 class GuildUpgradeCost:
     def __init__(self, json=None):
@@ -41,10 +41,10 @@ class GuildUpgrade(LoadableObjectBase):
         self.experience = json.get("experience", None)
 
         if("prerequisites" in json):
-            for(prereq_data in json["prerequisites"]):
+            for prereq_data in json["prerequisites"]:
                 self.prerequisites.append(LoadableObjectContainer(prereq_data, LoadableTypeEnum.GuildUpgrade))
 
-        for(cost_data in json["costs"]):
+        for cost_data in json["costs"]:
             self.costs.append(GuildUpgradeCost(cost_data))
 
 class Guild(LoadableObjectBase):
