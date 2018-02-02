@@ -47,7 +47,7 @@ class LogEntryJoined(LogEntry):
     def _populate_inner(self, json):
         pass
 
-class LogentryInfluence(LogEntry):
+class LogEntryInfluence(LogEntry):
     def __init__(self, id, json=None):
         self.activity = None
         self.total_participants = None
