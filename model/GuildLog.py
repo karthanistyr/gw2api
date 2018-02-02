@@ -11,6 +11,7 @@ class LogTypeEnum(Enum):
     Stash = "stash"
     Motd = "motd"
     Upgrade = "upgrade"
+    Influence = "influence"
 
 class LogEntry(metaclass=ABCMeta):
     def __init__(self, id, json=None):
@@ -45,6 +46,18 @@ class LogEntryJoined(LogEntry):
 
     def _populate_inner(self, json):
         pass
+
+class LogentryInfluence(LogEntry):
+    def __init__(self, id, json=None):
+        self.activity = None
+        self.total_participants = None
+        self.participants = []
+        super().__init__(id, json)
+
+    def _populate_inner(self, json):
+        self.activity = json.get("activity", None)
+        self.total_participants = json.get("total_participants", None)
+        self.participants = json.get("participants", [])
 
 class LogEntryInvited(LogEntry):
     def __init__(self, id, json=None):

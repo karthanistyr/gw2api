@@ -80,6 +80,8 @@ class Querier:
                     returned_lines.append(LogEntryMotd(line["id"], line))
                 elif(line["type"] == LogTypeEnum.Upgrade.value):
                     returned_lines.append(LogEntryUpgrade(line["id"], line))
+                elif(line["type"] == LogTypeEnum.Influence.value):
+                    returned_lines.append(LogEntryInfluence(line["id"], line))
                 else:
                     returned_lines.append(LogUnknown(line["id"], line))
 
