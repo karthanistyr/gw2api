@@ -6,7 +6,7 @@ from .model.Skill import Skill
 from .model.Skin import Skin
 from .model.Title import Title
 from .model.Character import Character
-from .model.Guild import Guild
+from .model.Guild import Guild, GuildUpgrade
 from .model.GuildLog import *
 from .model.LoadableObject import LoadableObjectContainer, LoadableObjectVisitorBase
 from .client.Gw2RestClient import Gw2RestClient
@@ -57,12 +57,23 @@ class Querier:
 
         return [guild]
 
+    def _get_guild_upgrades(self, ids, lang=None):
+        upgrades_data = self.rest_client.get_guild_upgrades(ids, lang)
+        returned_items = []
+        if(upgrades_data is not None and any(upgrades_data)):
+            for upgrade_data in upgrades_data:
+                upgrade = GuildUpgrade(upgrade_data["id"])
+                upgrade.populate(upgrade_data)
+                returned_items.append(upgrade)
+
+        return returned_items
+
     @privileged
     def _get_guild_log(self, id, api_key, nb_lines=None):
         guild_log_data = self.rest_client.get_guild_log(id, api_key, nb_lines)
         returned_lines = []
 
-        if(guild_log_data is not None and len(guild_log_data) > 0):
+        if(guild_log_data is not None and any(guild_log_data)):
             for line in guild_log_data:
                 if(line["type"] == LogTypeEnum.Joined.value):
                     returned_lines.append(LogEntryJoined(line["id"], line))
@@ -301,6 +312,9 @@ class Querier:
 
                 if(any(loadable_guilds)):
                     fetch_and_correlate(loadable_guilds, self._get_guild)
+
+                f(any(loadable_guildupgrades)):
+                    fetch_and_correlate(loadable_guildupgrades, self._get_guild_upgrades)
 
             return to_return
         return wrapper

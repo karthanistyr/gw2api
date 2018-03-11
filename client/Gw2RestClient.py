@@ -149,6 +149,17 @@ class Gw2RestClient:
         guild_data = self.get_request(ep_guild.format(id), None, api_key)
         return guild_data
 
+    def get_guild_upgrades(self, ids, lang=None):
+        ep_guild_upgrades = "/v2/guild/upgrades"
+
+        args = {"ids": ids}
+
+        if(lang is not None):
+            args["lang"] = lang
+
+        upgrades_data = self.get_request(ep_guild_upgrades, args)
+        return upgrades_data
+
     def get_guild_log(self, id, api_key, nb_lines=None):
         ep_guild_log = "/v2/guild/{}/log"
 
