@@ -313,7 +313,7 @@ class Querier:
                 if(any(loadable_guilds)):
                     fetch_and_correlate(loadable_guilds, self._get_guild)
 
-                f(any(loadable_guildupgrades)):
+                if(any(loadable_guildupgrades)):
                     fetch_and_correlate(loadable_guildupgrades, self._get_guild_upgrades)
 
             return to_return
