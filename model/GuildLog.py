@@ -107,7 +107,7 @@ class LogEntryStash(LogEntry):
 
     def _populate_inner(self, json):
         self.operation = json.get("operation", None)
-        self.item = LoadableObjectContainer(json["item_id"], LoadableTypeEnum.Item) if "item_id" in json else None
+        self.item = LoadableObjectContainer(json["item_id"], LoadableTypeEnum.Item) if ("item_id" in json and json["item_id"] > 0) else None
         self.count = json.get("count", None)
         self.coins = json.get("coins", None)
 
