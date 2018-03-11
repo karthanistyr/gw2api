@@ -165,6 +165,6 @@ class Gw2RestClient:
 
         log_data = self.get_request(ep_guild_log.format(id), None, api_key)
         if(nb_lines is not None):
-            log_data = log_data[:nb_lines]
+            return log_data[:nb_lines]
 
         return log_data
