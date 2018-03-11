@@ -268,38 +268,38 @@ class Querier:
                         loadable_guildupgrades[items_to_load[index].id] = items_to_load[index]
 
                 #bulk fetch items
-                if(len(loadable_items) > 0):
+                if(any(loadable_items)):
                     fetch_and_correlate(loadable_items, self._get_items)
 
                 #bulk fetch items
-                if(len(loadable_itemstats) > 0):
+                if(any(loadable_itemstats)):
                     fetch_and_correlate(loadable_itemstats, self._get_itemstats)
 
                 #bulk fetch skills
-                if(len(loadable_skills) > 0):
+                if(any(loadable_skills)):
                     fetch_and_correlate(loadable_skills, self._get_skills)
 
                 #bulk fetch skills
-                if(len(loadable_skins) > 0):
+                if(any(loadable_skins)):
                     fetch_and_correlate(loadable_skins, self._get_skins)
 
                 #bulk fetch achievements
-                if(len(loadable_achievements) > 0):
+                if(any(loadable_achievements)):
                     fetch_and_correlate(loadable_achievements, self._get_achievements)
 
                 #bulk fetch titles
-                if(len(loadable_titles) > 0):
+                if(any(loadable_titles)):
                     fetch_and_correlate(loadable_titles, self._get_titles)
 
                 #bulk fetch masteries
-                if(len(loadable_masteries) > 0):
+                if(any(loadable_masteries)):
                     fetch_and_correlate(loadable_masteries, self._get_masteries)
 
                 #bulk fetch characters
-                if(len(loadable_characters) > 0):
+                if(any(loadable_characters)):
                     fetch_and_correlate(loadable_characters, self._get_character)
 
-                if(len(loadable_guilds) > 0):
+                if(any(loadable_guilds)):
                     fetch_and_correlate(loadable_guilds, self._get_guild)
 
             return to_return
@@ -368,5 +368,6 @@ class Querier:
     def get_guild(self, id, lang=None, api_key=None):
         return LoadableObjectContainer(id, LoadableTypeEnum.Guild)
 
+    @_depth_fetch
     def get_guild_log(self, id, api_key, nb_lines=None):
         return self._get_guild_log(id, api_key, nb_lines)
