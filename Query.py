@@ -239,7 +239,7 @@ class Querier:
                     containers[api_item_id].object = api_items_dict[api_item_id]
 
             to_return = func(self, ids, lang)
-            while len(self.tracker.items) > 0:
+            while any(self.tracker.items):
                 items_to_load = self.tracker.items
                 self.tracker.items = {}
 
